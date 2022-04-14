@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Field;
 use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -64,7 +65,7 @@ class SubscriberTest extends TestCase
             ]);
     }
 
-    public function test_user_can_view_subscribers()
+    public function test_user_can_view_all_subscribers()
     {
         Sanctum::actingAs($user = User::factory()->create(), ['*']);
 
