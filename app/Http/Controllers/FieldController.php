@@ -22,7 +22,7 @@ class FieldController extends Controller
             'value'=> '',
             'type'=> '',
         ]);
-
+        
         $field = Field::create($data);
 
         return new FieldResource($field);

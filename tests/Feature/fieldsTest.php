@@ -23,6 +23,7 @@ class fieldsTest extends TestCase
         ]);
 
         $field = Field::first();
+        $this->assertNotNull($field->slug);
         $response->assertStatus(201)
             ->assertJson([
                 'data'=>[
@@ -31,6 +32,7 @@ class fieldsTest extends TestCase
                     'attributes'=>[
                         'value'=>$field->value,
                         'type'=>$field->type,
+                        'slug'=>$field->slug,
                         ],
                 ]
             ]);
@@ -42,7 +44,7 @@ class fieldsTest extends TestCase
 
         $field = Field::factory()->create();
 
-        $response = $this->get("api/fields/{$field->id}");
+        $response = $this->get("api/fields/{$field->slug}");
 
         $response->assertStatus(200)
             ->assertJson([

@@ -21,6 +21,7 @@ class Field extends JsonResource
                 'attributes'=> [
                     'value'=>$this->value,
                     'type'=>$this->type,
+                    'slug'=>$this->slug,
                     ]
                 ]
             ];
