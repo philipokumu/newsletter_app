@@ -10,4 +10,9 @@ class Subscriber extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function fields()
+    {
+        return $this->belongsToMany(Field::class)->withPivot('field_value')->withTimestamps();
+    }
 }

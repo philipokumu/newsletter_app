@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubscriberRequest;
 use App\Http\Resources\Subscriber as SubscriberResource;
 use App\Http\Resources\SubscriberCollection;
+use App\Models\Field;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
@@ -16,16 +18,16 @@ class SubscriberController extends Controller
         return new SubscriberCollection($subscribers);
     }
 
-    public function store()
+    public function store(SubscriberRequest $request)
     {
-        $data = request()->validate([
-            'name'=> '',
-            'email'=> '',
-            'address'=> '',
-            'state'=> ''
-        ]);
+        $subscriber = Subscriber::create(request()->only(['name', 'email','address','state']));
 
-        $subscriber = Subscriber::create($data);
+        if (request()->has('fields')) {
+            
+            foreach (request()->get('fields') as $key => $value) {
+                $subscriber->fields()->attach(['field_id'=>Field::where('slug',$key)->first()->id],['field_value'=>$value]);
+            }
+        }
 
         return new SubscriberResource($subscriber);
     }

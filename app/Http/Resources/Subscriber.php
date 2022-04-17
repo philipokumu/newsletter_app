@@ -22,7 +22,8 @@ class Subscriber extends JsonResource
                     'name'=>$this->name,
                     'email'=>$this->email,
                     'address'=>$this->address,
-                    'state'=>$this->state
+                    'state'=>$this->state,
+                    'fieldDetails'=>new FieldCollection($this->fields)
                     ]
                 ]
             ];
