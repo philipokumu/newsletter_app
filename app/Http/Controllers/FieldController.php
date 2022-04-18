@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FieldRequest;
 use App\Http\Resources\Field as FieldResource;
 use App\Http\Resources\FieldCollection;
 use App\Models\Field;
@@ -16,14 +17,12 @@ class FieldController extends Controller
         return new FieldCollection($fields);
     }
 
-    public function store()
+    public function store(FieldRequest $request)
     {
-        $data = request()->validate([
-            'value'=> '',
-            'type'=> '',
+        $field = Field::create([
+            'value' => $request->safe()->value,
+            'type' => $request->safe()->type
         ]);
-        
-        $field = Field::create($data);
 
         return new FieldResource($field);
     }

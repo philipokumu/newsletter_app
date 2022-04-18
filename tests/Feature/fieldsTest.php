@@ -95,4 +95,37 @@ class fieldsTest extends TestCase
                 ]
             ]);
     }
+
+    /** VALIDATION */
+
+    public function test_all_fields_are_required_when_creating_new_field()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/fields', [
+            'value'=> '',
+            'type'=> '',
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('value', $responseString['errors']['meta']);
+        $this->assertArrayHasKey('type', $responseString['errors']['meta']);
+    }
+
+    public function test_a_new_field_value_must_be_unique_when_creating_new_field()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $area = Field::factory()->create(['value'=>'area','type' => 'string']);
+
+        $response = $this->post('api/fields', [
+            'value'=> 'area',
+            'type'=> 'string',
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('value', $responseString['errors']['meta']);
+    }
 }

@@ -109,8 +109,6 @@ class SubscriberTest extends TestCase
 
     public function test_user_can_create_new_subscriber_along_with_new_fields()
     {
-        $this->withoutExceptionHandling();
-        
         Sanctum::actingAs($user = User::factory()->create(), ['*']);
 
         $area = Field::factory()->create(['value'=>'area','type' => 'string']);
@@ -194,5 +192,128 @@ class SubscriberTest extends TestCase
                         ]
                     ]
             ]);
+    }
+
+    /** VALIDATION */
+    public function test_all_default_fields_are_required_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/subscribers', [
+            'name'=> '',
+            'email'=> '',
+            'address'=> '',
+            'state'=> '',
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('name', $responseString['errors']['meta']);
+        $this->assertArrayHasKey('email', $responseString['errors']['meta']);
+        $this->assertArrayHasKey('address', $responseString['errors']['meta']);
+        $this->assertArrayHasKey('state', $responseString['errors']['meta']);
+    }
+
+    public function test_name_has_minimum_3_characters_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'tr',
+            'email'=> 'test@example.com',
+            'address'=> 'VA London',
+            'state'=> 'active',
+        ]);
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('name', $responseString['errors']['meta']);
+    }
+
+    public function test_email_has_valid_format_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'test subscriber',
+            'email'=> 'testing.com',
+            'address'=> 'VA London',
+            'state'=> 'active',
+        ]);
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('email', $responseString['errors']['meta']);
+    }
+
+    public function test_email_is_active_and_of_valid_host_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'test subscriber',
+            'email'=> 'test@gmail',
+            'address'=> 'VA London',
+            'state'=> 'active',
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('email', $responseString['errors']['meta']);
+    }
+
+    public function test_state_is_a_valid_option_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'test subscriber',
+            'email'=> 'testing@gmail.com',
+            'address'=> 'VA London',
+            'state'=> 'activate',
+        ]);
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('state', $responseString['errors']['meta']);
+    }
+
+    public function test_all_new_fields_are_required_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $area = Field::factory()->create(['value'=>'area','type' => 'string']);
+
+        $fields = [$area->slug =>''];
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'test subscriber',
+            'email'=> 'testing@gmail.com',
+            'address'=> 'VA London',
+            'state'=> 'active',
+            'fields' => $fields
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('fields.area', $responseString['errors']['meta']);
+    }
+
+    public function test_all_new_fields_are_validated_using_the_field_type_when_creating_new_subscriber()
+    {
+        Sanctum::actingAs($user = User::factory()->create(), ['*']);
+
+        $age = Field::factory()->create(['value'=>'age','type' => 'number']);
+
+        $fields = [$age->slug =>'five'];
+
+        $response = $this->post('api/subscribers', [
+            'name'=> 'test subscriber',
+            'email'=> 'testing@gmail.com',
+            'address'=> 'VA London',
+            'state'=> 'active',
+            'fields' => $fields
+        ]);
+
+        $responseString = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('fields.age', $responseString['errors']['meta']);
     }
 }

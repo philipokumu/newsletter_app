@@ -20,12 +20,12 @@ class SubscriberController extends Controller
 
     public function store(SubscriberRequest $request)
     {
-        $subscriber = Subscriber::create(request()->only(['name', 'email','address','state']));
+        $subscriber = Subscriber::create($request->safe()->only(['name', 'email','address','state']));
 
         if (request()->has('fields')) {
             
-            foreach (request()->get('fields') as $key => $value) {
-                $subscriber->fields()->attach(['field_id'=>Field::where('slug',$key)->first()->id],['field_value'=>$value]);
+            foreach (request()->get('fields') as $field => $value) {
+                $subscriber->fields()->attach(['field_id'=>Field::where('slug',$field)->first()->id],['field_value'=>$value]);
             }
         }
 
