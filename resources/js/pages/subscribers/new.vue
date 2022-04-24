@@ -132,7 +132,7 @@ export default {
             name: "",
             address: "",
             email: "",
-            fields: [{ country: "Geneva" }],
+            fields: {},
             state: "- Select state -",
         });
 
@@ -152,9 +152,7 @@ export default {
         const addNewField = (field) => {
             // push to form field array to collect user values from form
             const slug = field.data.attributes.slug;
-            let fieldObject = {};
-            fieldObject[slug] = "";
-            data.value.fields.push(fieldObject);
+            data.value.fields[slug] = "";
 
             // For use in creating the actual input field
             formFields.value.push(field);
@@ -176,10 +174,11 @@ export default {
         };
 
         const submitForm = () => {
-            if (!data.value.fields.length > 0) {
+            console.log(Object.entries(data.value.fields).length);
+            if (!Object.entries(data.value.fields).length > 0) {
                 delete data.value.fields;
             }
-            console.log(data.value.fields);
+            console.log(data.value);
             const valid = validate();
             if (!valid) return;
             store.createSubscriber(data.value);

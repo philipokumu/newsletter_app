@@ -23,7 +23,7 @@ class SubscriberController extends Controller
         $subscriber = Subscriber::create($request->safe()->only(['name', 'email','address','state']));
 
         if (request()->has('fields')) {
-            
+            // dd(request()->get('fields'));
             foreach (request()->get('fields') as $field => $value) {
                 $subscriber->fields()->attach(['field_id'=>Field::where('slug',$field)->first()->id],['field_value'=>$value]);
             }

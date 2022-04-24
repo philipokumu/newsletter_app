@@ -26,6 +26,7 @@ class FieldTypeRule implements Rule
      */
     public function passes($attribute, $value)
     {
+        // dd($value);
         $slug = str_replace("fields.","", $attribute);
         $field = Field::where('slug',$slug)->select('type')->first();
         $field_type = $field->type;

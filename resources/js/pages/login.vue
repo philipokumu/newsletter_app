@@ -117,16 +117,7 @@ export default {
             if (!valid) return;
             store.login(data.value);
 
-            // window.location.href = "/subscribers";
             window.location.replace("/subscribers");
-
-            // router.push("/subscribers");
-            // if (store.isAuthenticated) {
-            //     router.push("/subscribers");
-            // } else {
-            //     // console.log(getErrors);
-            //     console.log("getErrors");
-            // }
         };
 
         return { isBusy, serverErrors, submitForm, data };

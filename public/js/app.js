@@ -23244,15 +23244,8 @@ __webpack_require__.r(__webpack_exports__);
     var submitForm = function submitForm() {
       var valid = validate();
       if (!valid) return;
-      store.login(data.value); // window.location.href = "/subscribers";
-
-      window.location.replace("/subscribers"); // router.push("/subscribers");
-      // if (store.isAuthenticated) {
-      //     router.push("/subscribers");
-      // } else {
-      //     // console.log(getErrors);
-      //     console.log("getErrors");
-      // }
+      store.login(data.value);
+      window.location.replace("/subscribers");
     };
 
     return {
@@ -23347,9 +23340,7 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       address: "",
       email: "",
-      fields: [{
-        country: "Geneva"
-      }],
+      fields: {},
       state: "- Select state -"
     }); //Fetch fields
 
@@ -23371,9 +23362,7 @@ __webpack_require__.r(__webpack_exports__);
     var addNewField = function addNewField(field) {
       // push to form field array to collect user values from form
       var slug = field.data.attributes.slug;
-      var fieldObject = {};
-      fieldObject[slug] = "";
-      data.value.fields.push(fieldObject); // For use in creating the actual input field
+      data.value.fields[slug] = ""; // For use in creating the actual input field
 
       formFields.value.push(field); // Remove from dynamic fields so as not to be added twice
 
@@ -23393,11 +23382,13 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var submitForm = function submitForm() {
-      if (!data.value.fields.length > 0) {
+      console.log(Object.entries(data.value.fields).length);
+
+      if (!Object.entries(data.value.fields).length > 0) {
         delete data.value.fields;
       }
 
-      console.log(data.value.fields);
+      console.log(data.value);
       var valid = validate();
       if (!valid) return;
       store.createSubscriber(data.value);
@@ -25110,16 +25101,7 @@ var routes = [{
   meta: {
     title: "subscriber",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated, isBusy } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value && !isBusy) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/subscribers",
   name: "subscribers",
@@ -25127,16 +25109,7 @@ var routes = [{
   meta: {
     title: "subscribers",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/fields",
   name: "fields",
@@ -25144,16 +25117,7 @@ var routes = [{
   meta: {
     title: "Fields",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/subscribers/new",
   name: "subscribers.new",
@@ -25161,16 +25125,7 @@ var routes = [{
   meta: {
     title: "subscribers",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/subscribers/:id",
   name: "subscribers.show",
@@ -25178,16 +25133,7 @@ var routes = [{
   meta: {
     title: "subscriber",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/fields/:slug",
   name: "fields.show",
@@ -25195,16 +25141,7 @@ var routes = [{
   meta: {
     title: "fields",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/fields/new",
   name: "fields.new",
@@ -25212,16 +25149,7 @@ var routes = [{
   meta: {
     title: "fields",
     authenticated: true
-  } // beforeEnter: (to, from, next) => {
-  //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
-  //         return true;
-  //     } else {
-  //         return next("/login");
-  //     }
-  // },
-
+  }
 }, {
   path: "/:pathMatch(.*)*",
   name: "subscribers",
@@ -25237,16 +25165,7 @@ var routes = [{
   meta: {
     title: "Login",
     authenticated: false
-  } // beforeEnter: (to, from, next) => {
-  //     const token = localStorage.getItem("token");
-  //     console.log(token);
-  //     if (!token) {
-  //         return true;
-  //     } else {
-  //         next("/subscribers");
-  //     }
-  // },
-
+  }
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createWebHistory)(),

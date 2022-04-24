@@ -109,6 +109,7 @@ class SubscriberTest extends TestCase
 
     public function test_user_can_create_new_subscriber_along_with_new_fields()
     {
+        $this->withoutExceptionHandling();
         Sanctum::actingAs($user = User::factory()->create(), ['*']);
 
         $area = Field::factory()->create(['value'=>'area','type' => 'string']);

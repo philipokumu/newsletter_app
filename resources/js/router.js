@@ -15,105 +15,42 @@ const routes = [
         name: "subscriber",
         component: subscribers,
         meta: { title: "subscriber", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated, isBusy } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value && !isBusy) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/subscribers",
         name: "subscribers",
         component: subscribers,
         meta: { title: "subscribers", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/fields",
         name: "fields",
         component: fields,
         meta: { title: "Fields", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         next("/login");
-        //     }
-        // },
     },
     {
         path: "/subscribers/new",
         name: "subscribers.new",
         component: subscriberNew,
         meta: { title: "subscribers", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/subscribers/:id",
         name: "subscribers.show",
         component: subscriberShow,
         meta: { title: "subscriber", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/fields/:slug",
         name: "fields.show",
         component: fieldShow,
         meta: { title: "fields", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/fields/new",
         name: "fields.new",
         component: fieldNew,
         meta: { title: "fields", authenticated: true },
-        // beforeEnter: (to, from, next) => {
-        //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
-        //         return true;
-        //     } else {
-        //         return next("/login");
-        //     }
-        // },
     },
     {
         path: "/:pathMatch(.*)*",
@@ -126,15 +63,6 @@ const routes = [
         name: "login",
         component: login,
         meta: { title: "Login", authenticated: false },
-        // beforeEnter: (to, from, next) => {
-        //     const token = localStorage.getItem("token");
-        //     console.log(token);
-        //     if (!token) {
-        //         return true;
-        //     } else {
-        //         next("/subscribers");
-        //     }
-        // },
     },
 ];
 
