@@ -22,6 +22,7 @@ class Field extends JsonResource
                     'value'=>$this->value,
                     'type'=>$this->type,
                     'slug'=>$this->slug,
+                    'field_value' => isset($this->pivot->field_value) ? $this->pivot->field_value : ''
                     ]
                 ]
             ];

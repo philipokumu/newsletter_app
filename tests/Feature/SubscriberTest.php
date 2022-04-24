@@ -116,7 +116,8 @@ class SubscriberTest extends TestCase
         $student = Field::factory()->create(['value'=>'student','type' => 'boolean']);
         $birth_date = Field::factory()->create(['value'=>'birth_date','type' => 'date']);
         $fields = [$area->slug =>'Nairobi',$age->slug =>30, $student->slug =>false, $birth_date->slug =>Carbon::now()];
-        
+        dd($fields);
+
         $response = $this->post('api/subscribers',[
             'name'=> 'Test Subscriber',
             'email'=> 'testsubscriber@yahoo.com',
@@ -156,6 +157,8 @@ class SubscriberTest extends TestCase
 
         $fields = $subscriber->fields;
 
+
+
         $response = $this->get("api/subscribers/{$subscriber->id}");
 
         $response->assertStatus(200)
@@ -174,17 +177,19 @@ class SubscriberTest extends TestCase
                                             'attributes'=>[
                                                 'value'=>$fields->first()->value,
                                                 'type'=>$fields->first()->type,
+                                                'field_value' => $fields->first()->pivot->field_value
                                             ],
-                                        ]
-                                    ],
-                                    [
-                                        'data'=>[
-                                            'type'=>'fields',
-                                            'field_id'=>$fields->last()->id,
-                                            'attributes'=>[
-                                                'value'=>$fields->last()->value,
-                                                'type'=>$fields->last()->type,
-                                            ],
+                                            ]
+                                        ],
+                                        [
+                                            'data'=>[
+                                                'type'=>'fields',
+                                                'field_id'=>$fields->last()->id,
+                                                'attributes'=>[
+                                                    'value'=>$fields->last()->value,
+                                                    'type'=>$fields->last()->type,
+                                                    'field_value' => $fields->last()->pivot->field_value
+                                                ],
                                         ]
                                     ]
                                 ]

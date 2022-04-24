@@ -26,6 +26,7 @@ class SubscriberRequest extends FormRequest
      */
     public function rules()
     {
+        // print(request()->get('fields'));
         $rules = [
             'name'=> 'required|min:3',
             'email'=> 'required|email:rfc,dns',
