@@ -8,7 +8,7 @@ export const useAuthStore = defineStore("mainAuth", {
         authenticated: false,
     }),
     getters: {
-        getErrors: (state) => state.errors,
+        serverErrors: (state) => state.errors,
         isBusy: (state) => state.busy,
         isAuthenticated: (state) => state.authenticated,
     },

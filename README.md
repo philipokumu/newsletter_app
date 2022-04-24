@@ -8,24 +8,29 @@ You can setup this application using docker:
 
 ### Docker Setup
 
-1. Run entrypoint file(Only for initial setup on your machine)
+1. If you would want to run the project on a different port, consider changing MIX_APP_URL in .env.example. Currently setup uses port 8084
+2. Run entrypoint file(Only for initial setup on your machine)
 
 ```
 ./entrypoint.sh
 ```
 
-2. If you want to reopen the application i.e. after initial setup, use this command:
+3. Front end link: http://localhost:8084/login
+
+### Reopen application(if need be)
+
+If you want to reopen the application i.e. after initial setup, use this command:
 
 ```
 docker-compose -f docker-compose.yml up -d
 ```
 
-3. Front end link: http://localhost:8084
-
 ## Points of improvement in the application
 
 -   Better frontend validation of fields
+-   Frontend routes and authentication needs streamlining
 -   Caching to improve speed and scalability
+-   PSR-2 compliance
 
 ## Notable features of the application
 

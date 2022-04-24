@@ -88,18 +88,16 @@ import Spinner from "../components/Widgets/Spinner.vue";
 import Logo from "../components/Icons/Logo.vue";
 import { useAuthStore } from "../store/useAuth";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
 
 export default {
     components: { Spinner, Logo, GuestLayout },
     setup() {
         const store = useAuthStore();
-        const router = useRouter();
-        const { getErrors, isBusy, isAuthenticated } = storeToRefs(store);
+        const { errors, serverErrors, isBusy, isAuthenticated } =
+            storeToRefs(store);
         let data = ref({ email: "user@example.com", password: "password" });
-        let serverErrors = ref({ email: null });
 
         const validate = () => {
             let valid = true;
@@ -116,7 +114,6 @@ export default {
             const valid = validate();
             if (!valid) return;
             store.login(data.value);
-
             window.location.replace("/subscribers");
         };
 
