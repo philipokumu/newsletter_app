@@ -14,6 +14,7 @@ export const useSubscriberStore = defineStore("mainSubscriber", {
     },
     actions: {
         async fetchSubscribers() {
+            // console.log(localStorage.getItem("token"));
             try {
                 const response = await axios.get(
                     `${process.env.MIX_APP_URL}/api/subscribers`

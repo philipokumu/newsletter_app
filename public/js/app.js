@@ -23196,9 +23196,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Widgets_Spinner_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Widgets/Spinner.vue */ "./resources/js/components/Widgets/Spinner.vue");
 /* harmony import */ var _components_Icons_Logo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Icons/Logo.vue */ "./resources/js/components/Icons/Logo.vue");
 /* harmony import */ var _store_useAuth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/useAuth */ "./resources/js/store/useAuth.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/GuestLayout.vue */ "./resources/js/layouts/GuestLayout.vue");
 
 
@@ -23214,7 +23214,10 @@ __webpack_require__.r(__webpack_exports__);
     GuestLayout: _layouts_GuestLayout_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   setup: function setup() {
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_5__.storeToRefs)(store),
+    var store = (0,_store_useAuth__WEBPACK_IMPORTED_MODULE_2__.useAuthStore)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
+
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_6__.storeToRefs)(store),
         getErrors = _storeToRefs.getErrors,
         isBusy = _storeToRefs.isBusy,
         isAuthenticated = _storeToRefs.isAuthenticated;
@@ -23226,8 +23229,6 @@ __webpack_require__.r(__webpack_exports__);
     var serverErrors = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)({
       email: null
     });
-    var store = (0,_store_useAuth__WEBPACK_IMPORTED_MODULE_2__.useAuthStore)();
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
 
     var validate = function validate() {
       var valid = true; // const re = /\S+@\S+\.\S+/;
@@ -23243,13 +23244,15 @@ __webpack_require__.r(__webpack_exports__);
     var submitForm = function submitForm() {
       var valid = validate();
       if (!valid) return;
-      store.login(data.value);
+      store.login(data.value); // window.location.href = "/subscribers";
 
-      if (store.isAuthenticated) {
-        router.push("/subscribers");
-      } else {
-        console.log(getErrors);
-      }
+      window.location.replace("/subscribers"); // router.push("/subscribers");
+      // if (store.isAuthenticated) {
+      //     router.push("/subscribers");
+      // } else {
+      //     // console.log(getErrors);
+      //     console.log("getErrors");
+      // }
     };
 
     return {
@@ -23531,7 +23534,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" LOGO ");
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" MAILER LITE ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -25109,8 +25112,8 @@ var routes = [{
     authenticated: true
   } // beforeEnter: (to, from, next) => {
   //     const store = useAuthStore();
-  //     const { isAuthenticated } = storeToRefs(store);
-  //     if (to.meta.authenticated && isAuthenticated.value) {
+  //     const { isAuthenticated, isBusy } = storeToRefs(store);
+  //     if (to.meta.authenticated && isAuthenticated.value && !isBusy) {
   //         return true;
   //     } else {
   //         return next("/login");
@@ -25308,20 +25311,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useAuthStore": () => (/* binding */ useAuthStore)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-
-var useAuthStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mainAuth", {
+var useAuthStore = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("mainAuth", {
   state: function state() {
     return {
       errors: [],
@@ -25344,82 +25339,34 @@ var useAuthStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mainAuth"
     login: function login(data) {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.busy = true;
-                _context.prev = 1;
-                _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://localhost:8084", "/api/login"), data);
+      this.busy = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("http://127.0.0.1:8000", "/api/login"), data).then(function (response) {
+        localStorage.setItem("token", response.data.token);
+        _this.authenticated = true;
+        _this.busy = false;
+      })["catch"](function (e) {
+        localStorage.removeItem("token");
 
-              case 4:
-                response = _context.sent;
-                localStorage.setItem("token", response.data.token);
-                _this.busy = false;
-                _this.authenticated = true;
-                _context.next = 13;
-                break;
-
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](1);
-
-                if (_context.t0.response.status === 422) {
-                  _this.errors = _context.t0.response.data.errors.meta;
-                  console.log(_context.t0.response.data.errors.meta);
-                  _this.busy = false;
-                }
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[1, 10]]);
-      }))();
+        if (e.response.status === 422) {
+          _this.errors = e.response.data.errors.meta;
+          _this.busy = false;
+        }
+      });
     },
-    logout: function logout(data) {
+    logout: function logout() {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.busy = true;
-                _context2.prev = 1;
-                _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://localhost:8084", "/api/logout"));
-
-              case 4:
-                response = _context2.sent;
-                localStorage.removeItem("token");
-                _this2.busy = false;
-                _this2.authenticated = false;
-                _context2.next = 13;
-                break;
-
-              case 10:
-                _context2.prev = 10;
-                _context2.t0 = _context2["catch"](1);
-
-                if (_context2.t0.response.status === 422) {
-                  _this2.errors = _context2.t0.response.data.errors.meta;
-                  console.log(_context2.t0.response.data.errors.meta);
-                  _this2.busy = false;
-                }
-
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[1, 10]]);
-      }))();
+      this.busy = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat("http://127.0.0.1:8000", "/api/logout")).then(function (response) {
+        localStorage.removeItem("token");
+        _this2.busy = false;
+        _this2.authenticated = false;
+      })["catch"](function (e) {
+        if (e.response.status === 422) {
+          _this2.errors = e.response.data.errors.meta;
+          _this2.busy = false;
+        }
+      });
     }
   }
 });
@@ -25482,7 +25429,7 @@ var useFieldStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mainFiel
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://localhost:8084", "/api/fields"));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://127.0.0.1:8000", "/api/fields"));
 
               case 3:
                 response = _context.sent;
@@ -25516,7 +25463,7 @@ var useFieldStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mainFiel
                 _this2.busy = true;
                 _context2.prev = 1;
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://localhost:8084", "/api/fields/").concat(field_slug));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://127.0.0.1:8000", "/api/fields/").concat(field_slug));
 
               case 4:
                 response = _context2.sent;
@@ -25550,7 +25497,7 @@ var useFieldStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mainFiel
                 _this3.busy = true;
                 _context3.prev = 1;
                 _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://localhost:8084", "/api/fields"), data);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://127.0.0.1:8000", "/api/fields"), data);
 
               case 4:
                 response = _context3.sent;
@@ -25635,7 +25582,7 @@ var useSubscriberStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mai
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://localhost:8084", "/api/subscribers"));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://127.0.0.1:8000", "/api/subscribers"));
 
               case 3:
                 response = _context.sent;
@@ -25669,7 +25616,7 @@ var useSubscriberStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mai
                 _this2.busy = true;
                 _context2.prev = 1;
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://localhost:8084", "/api/subscribers/").concat(subscriber_id));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat("http://127.0.0.1:8000", "/api/subscribers/").concat(subscriber_id));
 
               case 4:
                 response = _context2.sent;
@@ -25703,7 +25650,7 @@ var useSubscriberStore = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.defineStore)("mai
                 _this3.busy = true;
                 _context3.prev = 1;
                 _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://localhost:8084", "/api/subscribers"), data);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat("http://127.0.0.1:8000", "/api/subscribers"), data);
 
               case 4:
                 response = _context3.sent;

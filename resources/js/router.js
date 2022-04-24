@@ -17,8 +17,8 @@ const routes = [
         meta: { title: "subscriber", authenticated: true },
         // beforeEnter: (to, from, next) => {
         //     const store = useAuthStore();
-        //     const { isAuthenticated } = storeToRefs(store);
-        //     if (to.meta.authenticated && isAuthenticated.value) {
+        //     const { isAuthenticated, isBusy } = storeToRefs(store);
+        //     if (to.meta.authenticated && isAuthenticated.value && !isBusy) {
         //         return true;
         //     } else {
         //         return next("/login");

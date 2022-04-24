@@ -95,11 +95,11 @@ import GuestLayout from "../layouts/GuestLayout.vue";
 export default {
     components: { Spinner, Logo, GuestLayout },
     setup() {
+        const store = useAuthStore();
+        const router = useRouter();
         const { getErrors, isBusy, isAuthenticated } = storeToRefs(store);
         let data = ref({ email: "user@example.com", password: "password" });
         let serverErrors = ref({ email: null });
-        const store = useAuthStore();
-        const router = useRouter();
 
         const validate = () => {
             let valid = true;
@@ -117,11 +117,16 @@ export default {
             if (!valid) return;
             store.login(data.value);
 
-            if (store.isAuthenticated) {
-                router.push("/subscribers");
-            } else {
-                console.log(getErrors);
-            }
+            // window.location.href = "/subscribers";
+            window.location.replace("/subscribers");
+
+            // router.push("/subscribers");
+            // if (store.isAuthenticated) {
+            //     router.push("/subscribers");
+            // } else {
+            //     // console.log(getErrors);
+            //     console.log("getErrors");
+            // }
         };
 
         return { isBusy, serverErrors, submitForm, data };

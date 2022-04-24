@@ -116,7 +116,6 @@ class SubscriberTest extends TestCase
         $student = Field::factory()->create(['value'=>'student','type' => 'boolean']);
         $birth_date = Field::factory()->create(['value'=>'birth_date','type' => 'date']);
         $fields = [$area->slug =>'Nairobi',$age->slug =>30, $student->slug =>false, $birth_date->slug =>Carbon::now()];
-        dd($fields);
 
         $response = $this->post('api/subscribers',[
             'name'=> 'Test Subscriber',
