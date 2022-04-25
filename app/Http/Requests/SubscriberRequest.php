@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Field;
-use App\Rules\FieldTypeRule;
+// use App\Rules\FieldTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -39,7 +39,7 @@ class SubscriberRequest extends FormRequest
             $fields = request()->get('fields');
             foreach($fields as $field => $value)
             {
-                $rules['fields.'.$field] = ['required', new FieldTypeRule];
+                $rules['fields.'.$field] = ['required'];
             }
         }
 
