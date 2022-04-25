@@ -24,6 +24,7 @@ export const useAuthStore = defineStore("mainAuth", {
                     this.busy = false;
                 })
                 .catch((e) => {
+                    console.log("hellooooo");
                     localStorage.removeItem("token");
                     if (e.response.status === 422) {
                         this.errors = e.response.data.errors.meta;

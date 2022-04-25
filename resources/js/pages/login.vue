@@ -90,11 +90,13 @@ import { useAuthStore } from "../store/useAuth";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
 import GuestLayout from "../layouts/GuestLayout.vue";
+import { useRouter } from "vue-router";
 
 export default {
     components: { Spinner, Logo, GuestLayout },
     setup() {
         const store = useAuthStore();
+        const router = useRouter();
         const { errors, serverErrors, isBusy, isAuthenticated } =
             storeToRefs(store);
         let data = ref({ email: "user@example.com", password: "password" });
@@ -114,7 +116,8 @@ export default {
             const valid = validate();
             if (!valid) return;
             store.login(data.value);
-            window.location.replace("/subscribers");
+            router.push("/subscribers");
+            // window.location.replace("/subscribers");
         };
 
         return { isBusy, serverErrors, submitForm, data };

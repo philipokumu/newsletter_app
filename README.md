@@ -16,6 +16,7 @@ You can setup this application using docker:
 ```
 
 3. Front end link: http://localhost:8084/login
+4. If you don't see any subscribers after login in to the site, reload page. This is a work around because of the asynchronous request. I will fix the logic later on.
 
 ### Reopen application(if need be)
 
