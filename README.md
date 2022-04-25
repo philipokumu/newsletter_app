@@ -8,7 +8,7 @@ You can setup this application using docker:
 
 ### Docker Setup
 
-1. If you would want to run the project on a different port, consider changing MIX_APP_URL in .env.example. Currently setup uses port 8084
+1. If you would want to run the project on a different port, consider changing MIX_APP_URL in .env.example. Current setup uses port 8084
 2. Run entrypoint file(Only for initial setup on your machine)
 
 ```
